@@ -43,6 +43,16 @@ public class Review {
 	public Long getId() {
 		return id;
 	}
+	
+    
+
+	public String getRating() {
+		return rating;
+	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
 
 	@Override
 	public String toString() {

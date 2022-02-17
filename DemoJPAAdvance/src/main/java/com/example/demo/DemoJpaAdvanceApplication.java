@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.entity.Course;
 import com.example.demo.repository.CourseRepository;
+import com.example.demo.repository.StudentRepository;
 
 @SpringBootApplication
 public class DemoJpaAdvanceApplication implements CommandLineRunner{
@@ -17,7 +18,10 @@ public class DemoJpaAdvanceApplication implements CommandLineRunner{
 	
 	private Logger logger=LoggerFactory.getLogger(this.getClass());
 	@Autowired
-	private CourseRepository repository;
+	private CourseRepository courseRepository;
+	
+	@Autowired
+	private StudentRepository studentRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoJpaAdvanceApplication.class, args);
@@ -25,8 +29,9 @@ public class DemoJpaAdvanceApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
+		studentRepository.saveStudentWithPassport();
 		// TODO Auto-generated method stub
-		 repository.playWithEntityManager();
+		 //repository.playWithEntityManager();
 		//Course course = repository.findById(10001L);//it should not be null in id
 //		logger.info("Course 10001->{}",course);
 //		repository.save(new Course("microservices"));
