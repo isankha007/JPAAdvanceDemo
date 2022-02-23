@@ -1,5 +1,7 @@
 package com.example.demo.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Course;
+import com.example.demo.entity.Review;
 
 @Repository
 @Transactional
@@ -60,4 +63,38 @@ public class CourseRepository {
 		//em.flush();
 		 //logger.info("Play with Entity manger start");
 	 }
+	 
+	 public void addReviewForCourse(Long courseId,List<Review> reviews) {
+			// TODO Auto-generated method stub
+		   Course course=findById(courseId);
+		   logger.info("Course.getreviews->{}",course.getReviews());
+		  
+		   
+		   for(Review review:reviews) {
+		   
+			   course.addReview(review);
+			   review.setCourse(course);
+			   
+			   em.persist(review);
+		   }
+			
+		}
+
+	public void addHardCodedReviewForCourse() {
+		// TODO Auto-generated method stub
+	   Course course=findById(10001L);
+	   logger.info("Course.getreviews->{}",course.getReviews());
+	   
+	   Review re1=new Review("Great hand-on stuff","5");
+	   Review re2=new Review("Awesome","5");
+	   
+	   course.addReview(re1);
+	   re1.setCourse(course);
+	   course.addReview(re2);
+	   re2.setCourse(course);
+	   
+	   em.persist(re1);
+	   em.persist(re2);
+		
+	}
 }
