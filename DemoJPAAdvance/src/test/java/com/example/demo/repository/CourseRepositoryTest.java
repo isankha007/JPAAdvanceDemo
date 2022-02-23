@@ -3,6 +3,8 @@ package com.example.demo.repository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import javax.transaction.Transactional;
+
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,8 +33,8 @@ class CourseRepositoryTest {
 	@Test
 	@DirtiesContext
 	public void deleteById_basic() {
-		repository.deleteById(10001L);
-		assertNull(repository.findById(10001L));
+		//repository.deleteById(10001L);
+		//assertNull(repository.findById(10001L));
 		//logger.info("Testing is running");
 	}
 	
@@ -52,6 +54,13 @@ class CourseRepositoryTest {
 	@DirtiesContext
 	public void PlayWithEntityManger() {
 		repository.playWithEntityManager();
+	}
+	
+	@Test
+	@Transactional
+	public void retriveReviewFortheCourse() {
+		Course course = repository.findById(10001L);
+		logger.info("{}",course.getReviews());
 	}
 
 }

@@ -6,8 +6,10 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
@@ -26,8 +28,13 @@ public class Course {
 	@Column(nullable=false)
 	private String name;
 	
-	@OneToMany(mappedBy = "course")
+	@OneToMany(mappedBy = "course",fetch = FetchType.EAGER)
 	private List<Review> reviews=new ArrayList<Review>();
+	
+	@ManyToMany(mappedBy = "courses")
+	private List<Student> students=new ArrayList<Student>();
+	
+	
 	
 	@UpdateTimestamp
 	private LocalDateTime lastUpdatedDate;
@@ -70,6 +77,16 @@ public class Course {
 	}
 
 	
+	
+	
+	public List<Student> getStudens() {
+		return students;
+	}
+
+	public void addStudens(Student student) {
+		this.students.add(student);
+	}
+
 	@Override
 	public String toString() {
 		return "Course [name=" + name + "]";

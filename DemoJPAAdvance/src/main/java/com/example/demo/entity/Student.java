@@ -1,12 +1,17 @@
 package com.example.demo.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -27,7 +32,23 @@ public class Student {
 	@OneToOne(fetch = FetchType.LAZY)
 	private Passport passport;
 	
+	@ManyToMany
+	@JoinTable(name="STUDENT_COURSE",
+	joinColumns = @JoinColumn(name="Student_id"),
+	inverseJoinColumns = @JoinColumn(name="course_id")
+	)
+	private List<Course> courses=new ArrayList<>();
 	
+	
+	
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+
 	public Passport getPassport() {
 		return passport;
 	}
@@ -59,6 +80,12 @@ public class Student {
 	@Override
 	public String toString() {
 		return String.format("Student[%s]",name);//"Students [name=" + name + "]";
+	}
+
+	public void addCourse(Course course) {
+		courses.add(course);
+		// TODO Auto-generated method stub
+		
 	}
 
 }

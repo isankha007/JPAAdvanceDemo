@@ -33,6 +33,9 @@ public class DemoJpaAdvanceApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		
+		
 		//studentRepository.saveStudentWithPassport();
 		// TODO Auto-generated method stub
 		 //repository.playWithEntityManager();
@@ -41,10 +44,14 @@ public class DemoJpaAdvanceApplication implements CommandLineRunner{
 //		repository.save(new Course("microservices"));
 		//repository.deleteById(10001L);
 		//courseRepository.addHardCodedReviewForCourse();
-		List<Review> reviews=new ArrayList<>();
-		reviews.add(new Review("Great hand-on stuff","5"));
-		reviews.add(new Review("Great Awesome","5"));
-		courseRepository.addReviewForCourse(10002L,reviews);
+		
+		//List<Review> reviews=new ArrayList<>();
+		//reviews.add(new Review("Great hand-on stuff","5"));
+		//reviews.add(new Review("Great Awesome","5"));
+		//courseRepository.addReviewForCourse(10002L,reviews);
+		
+		
+		studentRepository.insertHardcodedStudentAndCourse();
 		
 	}
 

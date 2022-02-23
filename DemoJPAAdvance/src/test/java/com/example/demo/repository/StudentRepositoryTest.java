@@ -55,6 +55,15 @@ class StudentRepositoryTest {
 		logger.info("Student Detail->{}",passport.getStudent());
 	}
 	
+	@Test
+	@Transactional
+	public void retriveStudentAndCourses() {
+		Student student=em.find(Student.class,20001L);
+		//assertEquals("JPA in 50 steps", student.getName());
+		logger.info("student ->{}",student);
+		logger.info("Student getCourses ->{}",student.getCourses());
+	}
+	
 	
 
 }
