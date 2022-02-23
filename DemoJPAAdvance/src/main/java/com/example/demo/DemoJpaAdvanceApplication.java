@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 import com.example.demo.entity.Course;
+import com.example.demo.entity.FullTimeEmployee;
+import com.example.demo.entity.ParttimeEmployee;
 import com.example.demo.entity.Review;
+import com.example.demo.entity.Student;
 import com.example.demo.repository.CourseRepository;
+import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.repository.StudentRepository;
 
 @SpringBootApplication
@@ -26,6 +31,9 @@ public class DemoJpaAdvanceApplication implements CommandLineRunner{
 	
 	@Autowired
 	private StudentRepository studentRepository;
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoJpaAdvanceApplication.class, args);
@@ -51,7 +59,13 @@ public class DemoJpaAdvanceApplication implements CommandLineRunner{
 		//courseRepository.addReviewForCourse(10002L,reviews);
 		
 		
-		studentRepository.insertHardcodedStudentAndCourse();
+		//studentRepository.insertStudentAndCourse(new Student("Putin"), new Course("Attack the ukarine"));
+		//studentRepository.insertHardcodedStudentAndCourse();
+		
+		employeeRepository.insert(new FullTimeEmployee("Sankha", new BigDecimal("10000000")));
+		employeeRepository.insert(new ParttimeEmployee("Debdoot", new BigDecimal("50")));
+		
+		logger.info("all Employees ->{}",employeeRepository.retriveAllTheEmployees());
 		
 	}
 

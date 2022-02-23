@@ -67,4 +67,14 @@ public class StudentRepository {
 		 
 		 em.persist(student);
 	 }
+	 
+	  public void insertStudentAndCourse(Student student,Course course) {
+		 em.persist(student);
+		 em.persist(course);
+		 
+		 student.addCourse(course);
+		 course.addStudens(student);
+		 
+		 em.persist(student);
+	 }
 }
