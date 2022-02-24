@@ -65,7 +65,9 @@ public class DemoJpaAdvanceApplication implements CommandLineRunner{
 		employeeRepository.insert(new FullTimeEmployee("Sankha", new BigDecimal("10000000")));
 		employeeRepository.insert(new ParttimeEmployee("Debdoot", new BigDecimal("50")));
 		
-		logger.info("all Employees ->{}",employeeRepository.retriveAllTheEmployees());
+		//logger.info("all Employees ->{}",employeeRepository.retriveAllTheEmployees());
+		logger.info("all fulltime Employees ->{}",employeeRepository.retriveAllFullTimeEmployees());
+		logger.info("all parttime Employees ->{}",employeeRepository.retriveAllPartTimeEmployees());
 		
 	}
 
