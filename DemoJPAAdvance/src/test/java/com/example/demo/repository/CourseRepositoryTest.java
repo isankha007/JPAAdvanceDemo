@@ -33,8 +33,8 @@ class CourseRepositoryTest {
 	@Test
 	@DirtiesContext
 	public void deleteById_basic() {
-		//repository.deleteById(10001L);
-		//assertNull(repository.findById(10001L));
+		repository.deleteById(10001L);
+		assertNull(repository.findById(10001L));
 		//logger.info("Testing is running");
 	}
 	

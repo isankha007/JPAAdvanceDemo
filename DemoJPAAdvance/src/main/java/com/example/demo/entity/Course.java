@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,11 +15,16 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 @Entity
 //@Table(name="Course")
 @NamedQuery(name="query_get_all_courses",query="Select c from Course c")
+@Cacheable
+@SQLDelete(sql = "update course set is_deleted=true where id=?")
+@Where(clause = "is_deleted=false")
 public class Course {
 	@Id
 	@GeneratedValue
@@ -41,6 +47,8 @@ public class Course {
 	
 	@CreationTimestamp
 	private LocalDateTime createdDate;
+	
+	private boolean isDeleted;
 	
 	public Course() {
 		
